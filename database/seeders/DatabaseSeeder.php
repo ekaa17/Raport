@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         DB::table('staff')->insert([
             [
                 'nip' => '12345678',
-                'nama' => 'admins',
+                'nama' => 'admin',
                 'email' => 'admin@gmail.com',
                 'jenis_kelamin' => 'L',
                 'role' => 'admin',
