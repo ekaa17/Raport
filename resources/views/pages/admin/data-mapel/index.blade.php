@@ -6,7 +6,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active"> {{ $title }} </li>
+                <li class="breadcrumb-item active">{{ $title }}</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -33,8 +33,8 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
-                            <h5 class="card-title">Total : 0 Staff</h5>
-                            <a href=" " class="btn btn-primary">
+                            <h5 class="card-title">Total : {{ $mapel->count() }} Mapel</h5>
+                            <a href="{{ route('data-mapel.create') }}" class="btn btn-primary">
                                 <i class="bi bi-plus"></i> Data Baru
                             </a>
                         </div>
@@ -44,28 +44,35 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Jurusan</th>
-                                        <th>Mapel</th>
+                                        <th>Nama Mapel</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($mapel as $index => $item)
                                     <tr>
-                                        <td> 1 </td>
-                                        <td>Multi media</td>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $item->nama_mapel }}</td>
                                         <td>
-                                            <ol>
-                                                <li>mtk</li>
-                                                <li>bin</li>
-                                            </ol>
+                                            <a href="{{ route('data-mapel.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                            <form action="{{ route('data-mapel.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 @endsection

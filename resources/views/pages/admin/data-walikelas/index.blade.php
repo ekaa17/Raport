@@ -42,7 +42,7 @@
                                             <option value="">2022/2023</option>
                                         </select>
                                     </form>
-                                    <a href=" " class="btn btn-primary">
+                                    <a href="{{ route('data-walikelas.create') }}" class="btn btn-primary">
                                         <i class="bi bi-plus"></i> Tahun Pelajaran
                                     </a>
                                 </div>
@@ -56,6 +56,12 @@
             <div class="col-xl-12">
               <div class="card">
                   <div class="card-body pt-3">
+                    <div class="d-flex align-items-center justify-content-between m-3">
+                        <h5 class="card-title"> Informasi Walikelas</h5>
+                        <a href="{{ route('data-walikelas.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus"></i> Data Baru
+                        </a>
+                    </div>
                       <div class="table-responsive">
                           <table class="table datatable" id="pegawai">
                               <thead>

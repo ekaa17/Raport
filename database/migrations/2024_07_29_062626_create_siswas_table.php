@@ -13,15 +13,24 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_induk');
+            $table->string('nama');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('alamat');
+            $table->string('kelas');
+            $table->foreignId('jurusan_id')
+                ->constrained('jurusans', 'id');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('siswas');
+        Schema::dropIfExists('siswa');
     }
 };

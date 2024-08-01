@@ -11,4 +11,13 @@ class Staff extends Authenticatable
 
     protected $table = 'staff';
     protected $guarded = ['id'];
+    protected $fillable = [
+        'nip',
+        'nama',
+        'email',
+        'jenis_kelamin',
+        'role',
+        'walikelas',
+        'password',
+    ];
 }

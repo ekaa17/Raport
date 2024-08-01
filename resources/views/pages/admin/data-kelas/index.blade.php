@@ -105,7 +105,11 @@
               <div class="card">
                   <div class="card-body pt-3">
                     <h2 class="text-center mt-2"> Informasi Kelas </h2>
-
+                    <div class="card-body pt-3">
+                        <a href="{{ route('data-kelas.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus"></i> Data Baru
+                        </a>
+                    </div>
                       <div class="table-responsive">
                           <table class="table datatable" id="pegawai">
                               <thead>
@@ -114,8 +118,8 @@
                                       <th>Kelas</th>
                                       <th>Jurusan</th>
                                       <th>Aksi</th>
-                                  </tr>
-                              </thead>
+                                    </tr>
+                                </thead>
                               <tbody>
                                   <tr>
                                       <td> 1 </td>
