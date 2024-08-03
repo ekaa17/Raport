@@ -2,33 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Jurusan;
+use App\Models\DetailMapelKelas;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class data_kelas extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'jurusan_id',
-        'mapel_id',
-        'nama_kelas',
-        'kelas',
-        'tahun_lajaran_id',
-    ];
+    protected $table = 'data_kelas';
+    protected $guarded = ['id'];
 
-    public function jurusans()
+    public function jurusan()
     {
-        return $this->belongsTo(jurusan::class);
+        return $this->belongsTo(Jurusan::class);
     }
 
-    public function mapels()
+    public function detail_mapel_kelas()
     {
-        return $this->belongsTo(data_mapel::class);
-    }
-
-    public function data_tahun_ajarans()
-    {
-        return $this->belongsTo(data_tahun_ajaran::class);
+        return $this->hasMany(DetailMapelKelas::class, 'kelas_id');
     }
 }

@@ -17,9 +17,8 @@ return new class extends Migration
             $table->string('nama');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('alamat');
-            $table->string('kelas');
-            $table->foreignId('jurusan_id')
-                ->constrained('jurusans', 'id');
+            $table->foreignId('kelas_id')
+                ->constrained('data_kelas', 'id');
             $table->timestamps();
         });
     }

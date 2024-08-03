@@ -17,39 +17,41 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body pt-3">
-                        <form action="{{ route('data-kelas.update', $kelas->id) }}" method="POST">
+                        <form action="{{ route('data-walikelas.update', $waliKelas->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
-                                <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="kelas" class="form-control @error('kelas') is-invalid @enderror" id="kelas" value="{{ old('kelas', $kelas->kelas) }}" required>
-                                    @error('kelas')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                <label for="id_kelas" class="col-md-3 col-form-label">Kelas</label>
+                                <div class="col-md-9">
+                                    <select id="id_kelas" name="id_kelas" class="form-select @error('id_kelas') is-invalid @enderror">
+                                        <option value="" disabled selected>Pilih Kelas</option>
+                                        @foreach($kelas as $k)
+                                            <option value="{{ $k->id }}" {{ old('id_kelas', $waliKelas->id_kelas) == $k->id ? 'selected' : '' }}>{{ $k->kelas }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_kelas')
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
-                                <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="jurusan" class="form-control @error('jurusan') is-invalid @enderror" id="jurusan" value="{{ old('jurusan', $kelas->jurusan) }}" required>
-                                    @error('jurusan')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="wali_kelas" class="col-sm-2 col-form-label">Wali Kelas</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="wali_kelas" class="form-control @error('wali_kelas') is-invalid @enderror" id="wali_kelas" value="{{ old('wali_kelas', $kelas->wali_kelas) }}" required>
-                                    @error('wali_kelas')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                <label for="id_staff" class="col-md-3 col-form-label">Staff</label>
+                                <div class="col-md-9">
+                                    <select id="id_staff" name="id_staff" class="form-select @error('id_staff') is-invalid @enderror">
+                                        <option value="" disabled selected>Pilih Staff</option>
+                                        @foreach($staff as $s)
+                                            <option value="{{ $s->id }}" {{ old('id_staff', $waliKelas->id_staff) == $s->id ? 'selected' : '' }}>{{ $s->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_staff')
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('data-kelas.index') }}" class="btn btn-secondary">Kembali</a>
+                                <a href="{{ route('data-walikelas.index') }}" class="btn btn-secondary">Kembali</a>
                             </div>
                         </form>
                     </div>

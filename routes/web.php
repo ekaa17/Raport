@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\WaliKelasController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,12 +30,21 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 
 Route::group(['middleware' => 'cekrole:kepala sekolah,admin,guru'], function() {
-    Route::get('/dashboard', function () {
-        return view('pages.dashboard');
-    });
+    Route::get('/dashboard', [LoginController::class, 'dashboard']);
+    
+});
+
+Route::group(['middleware' => 'cekrole:admin'], function() {
+    Route::get('/dashboard', [LoginController::class, 'dashboard']);
+
+    Route::get('/tutup-tahun-ajaran', [TahunAjaranController::class, 'tutup_tahun_ajaran']);
+    Route::resource('/tahun-ajaran', TahunAjaranController::class)->names('tahun-ajaran');
+    Route::resource('/jurusan', JurusanController::class)->names('jurusan');
     Route::resource('/data-staff', StaffController::class)->names('data-staff');
     Route::resource('/data-siswa', SiswaController::class)->names('data-siswa');
     Route::resource('/data-kelas', KelasController::class)->names('data-kelas');
+    Route::post('/data-kelas-mapel', [KelasController::class, 'show']);
+    Route::delete('/hapus-kelas-mapel/{id}', [KelasController::class, 'destroy_mapel']);
     Route::resource('/data-walikelas', WaliKelasController::class)->names('data-walikelas');
     Route::resource('/data-mapel', MapelController::class)->names('data-mapel');
 });

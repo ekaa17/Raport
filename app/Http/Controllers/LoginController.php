@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\data_mapel;
+use App\Models\Jurusan;
+use App\Models\siswa;
+use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -42,5 +46,13 @@ class LoginController extends Controller
             }
         } 
         return redirect('/');
+    }
+
+    public function dashboard() {
+        $total_guru = Staff::count();
+        $total_siswa = siswa::count();
+        $total_mapel = data_mapel::count();
+        $total_jurusan = Jurusan::count();
+        return view('pages.dashboard', compact('total_guru', 'total_siswa', 'total_mapel', 'total_jurusan'));
     }
 }

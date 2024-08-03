@@ -38,12 +38,12 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="id_kelas" class="col-md-4 col-form-label">Kelas</label>
-                                <div class="col-md-8">
+                                <label for="id_kelas" class="col-md-3 col-form-label">Kelas</label>
+                                <div class="col-md-9">
                                     <select id="id_kelas" name="id_kelas" class="form-select @error('id_kelas') is-invalid @enderror">
                                         <option value="" disabled selected>Pilih Kelas</option>
                                         @foreach($kelas as $k)
-                                            <option value="{{ $k->id }}">{{ $k->kelas }}</option>
+                                            <option value="{{ $k->id }}" {{ old('id_kelas') == $k->id ? 'selected' : '' }}>{{ $k->kelas }}</option>
                                         @endforeach
                                     </select>
                                     @error('id_kelas')
@@ -53,12 +53,12 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="id_staff" class="col-md-4 col-form-label">Staff</label>
-                                <div class="col-md-8">
+                                <label for="id_staff" class="col-md-3 col-form-label">Staff</label>
+                                <div class="col-md-9">
                                     <select id="id_staff" name="id_staff" class="form-select @error('id_staff') is-invalid @enderror">
                                         <option value="" disabled selected>Pilih Staff</option>
                                         @foreach($staff as $s)
-                                            <option value="{{ $s->id }}">{{ $s->nama }}</option>
+                                            <option value="{{ $s->id }}" {{ old('id_kelas') == $k->id ? 'selected' : '' }}>{{ $s->nama }}</option>
                                         @endforeach
                                     </select>
                                     @error('id_staff')
@@ -68,22 +68,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="data_tahun_ajaran" class="col-md-4 col-form-label">Tahun Ajaran</label>
-                                <div class="col-md-8">
-                                    <select id="data_tahun_ajaran" name="data_tahun_ajaran" class="form-select @error('data_tahun_ajaran') is-invalid @enderror">
-                                        <option value="" disabled selected>Pilih Tahun Ajaran</option>
-                                        @foreach($tahunAjaran as $t)
-                                            <option value="{{ $t->id }}">{{ $t->tahun }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('data_tahun_ajaran')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-8 offset-md-4">
+                                <div class="d-flex justify-content-between align-items-center">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="{{ route('data-walikelas.index') }}" class="btn btn-secondary">Batal</a>
                                 </div>

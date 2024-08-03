@@ -6,7 +6,17 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">{{ $title }}</li>
+                <li class="breadcrumb-item active">
+                    {{ $title }}
+                    @if ( $kelas->kelas == 10)
+                        X
+                    @elseif ( $kelas->kelas == 11)
+                        XI
+                    @else
+                        XII
+                    @endif
+                    {{ $kelas->nama_kelas }}
+                </li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -33,8 +43,8 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
-                            <h5 class="card-title">Total : {{ $staff->count() }} Staff</h5>
-                            <a href="{{ route('data-staff.create') }}" class="btn btn-primary">
+                            <h5 class="card-title">Total : {{ $siswa->count() }} Siswa</h5>
+                            <a href="" class="btn btn-primary btn-sm">
                                 <i class="bi bi-plus"></i> Data Baru
                             </a>
                         </div>
@@ -44,36 +54,24 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>NIP</th>
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Gender</th>
-                                        <th>Role</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($staff as $index => $member)
+                                    @foreach($siswa as $index => $item)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $member->nip }}</td>
-                                        <td>{{ $member->nama }}</td>
-                                        <td>{{ $member->email }}</td>
-                                        <td>{{ $member->jenis_kelamin == 'L' ? 'Laki - Laki' : 'Perempuan' }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                         <td>
-                                            @if($member->role == 'kepala sekolah')
-                                                <span class="badge rounded-pill bg-secondary">{{ $member->role }}</span>
-                                            @elseif($member->role == 'admin')
-                                                <span class="badge rounded-pill bg-primary">{{ $member->role }}</span>
-                                            @elseif($member->role == 'guru')
-                                                <span class="badge rounded-pill bg-info">{{ $member->role }}</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('data-staff.edit', $member->id) }}" class="btn btn-primary btn-sm">
+                                            <a href="{{ route('data-staff.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="bi bi-pencil-fill"></i>
                                             </a>
-                                            <form action="{{ route('data-staff.destroy', $member->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('data-staff.destroy', $item->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">

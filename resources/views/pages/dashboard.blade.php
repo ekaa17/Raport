@@ -44,7 +44,7 @@
                         <i class="bi bi-person-badge-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6> 0 </h6>
+                      <h6> {{ $total_guru }} </h6>
                     </div>
                   </div>
                 </div>
@@ -64,7 +64,7 @@
                         <i class="bi bi-people-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6> 0 </h6>
+                      <h6> {{ $total_siswa }} </h6>
                     </div>
                   </div>
                 </div>
@@ -85,7 +85,7 @@
                         <i class="bi bi-book"></i>
                     </div>
                     <div class="ps-3">
-                      <h6> 0 </h6>
+                      <h6> {{ $total_mapel }} </h6>
                     </div>
                   </div>
 
@@ -107,7 +107,7 @@
                         <i class="bi bi-bookmark"></i>
                     </div>
                     <div class="ps-3">
-                      <h6> 0 </h6>
+                      <h6> {{ $total_jurusan }} </h6>
                     </div>
                   </div>
 

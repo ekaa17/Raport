@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kelas', function (Blueprint $table) {
+        Schema::create('detail_mapel_kelas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jurusan_id')
-                ->constrained('jurusans', 'id')
-                ->onDelete('cascade');
-            $table->string('nama_kelas');
-            $table->enum('kelas', ['10', '11', '12']);
+            $table->foreignId('kelas_id')
+            ->constrained('data_kelas', 'id')
+            ->onDelete('cascade');
+            $table->foreignId('mapel_id')
+            ->constrained('data_mapels', 'id')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kelas');
+        Schema::dropIfExists('detail_mapel_kelas');
     }
 };

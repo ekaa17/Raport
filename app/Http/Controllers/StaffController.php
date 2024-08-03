@@ -26,7 +26,7 @@ class StaffController extends Controller
     {
         // Validasi data
         $request->validate([
-            'nip' => 'required|string|max:20|unique:staff',
+            'nip' => 'required|integer||digits:18|unique:staff',
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:staff',
             'jenis_kelamin' => 'required|in:L,P',

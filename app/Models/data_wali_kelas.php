@@ -14,7 +14,7 @@ class data_wali_kelas extends Model
     protected $fillable = [
         'id_kelas',
         'id_staff',
-        'data_tahun_ajaran',
+        'tahun_ajarans_id',
     ];
 
     /**

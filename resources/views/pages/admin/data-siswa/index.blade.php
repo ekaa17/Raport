@@ -33,49 +33,34 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
-                            <h5 class="card-title">Total : 0 Kelas</h5>
+                            <h5 class="card-title">Total : {{ $data_kelas->count() }} Kelas</h5>
                         </div>
 
-                        <div class="row">
+                        @foreach ($data_kelas as $item)
+                          <div class="row">
                             <div class="col-md-4">
                                 <div class="card">
                                   <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
-                                      <h5 class="card-title">XII MM</h5>
+                                      <h5 class="card-title">
+                                        @if ( $item->kelas == 10)
+                                            X
+                                        @elseif ( $item->kelas == 11)
+                                            XI
+                                        @else
+                                            XII
+                                        @endif
+                                        {{ $item->nama_kelas }}
+                                      </h5>
                                       <div class="d-flex gap-2">
-                                        <a href="" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
+                                        <a href="{{ route('data-siswa.show', $item->id) }}" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                      <h5 class="card-title">XII AKL 1</h5>
-                                      <div class="d-flex gap-2">
-                                        <a href="" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                      <h5 class="card-title">XII AKL 2</h5>
-                                      <div class="d-flex gap-2">
-                                        <a href="" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
+                          </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

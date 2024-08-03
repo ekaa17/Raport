@@ -39,36 +39,49 @@
                             </a>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table datatable" id="pegawai">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Nama Mapel</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($mapel as $index => $item)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $item->nama_mapel }}</td>
-                                        <td>
-                                            <a href="{{ route('data-mapel.edit', $item->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="bi bi-pencil-fill"></i>
-                                            </a>
-                                            <form action="{{ route('data-mapel.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                                    <i class="bi bi-trash-fill"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="row">
+                            @foreach ($mapel as $item)
+                            <div class="col-md-4">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                      <h5 class="card-title">{{ $item->nama_mapel }}</h5>
+                                      <div class="d-flex gap-2">
+
+                                        {{-- edit data --}}
+                                        <a href="{{ route('data-mapel.edit', $item->id) }}" class="btn btn-primary shadow-none">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                        {{-- hapus data --}}
+                                        <button type="button" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#hapus-mapel{{ $item->id }}"><i class="bi bi-trash"></i></button>
+                                        <div class="modal fade" id="hapus-mapel{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title"> Hapus Informasi Mata Pelajaran </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                    <div class="modal-body text-center">
+                                                        <p style="color: black">Apakah anda yakin untuk menghapus mata pelajaran {{ $item->nama_mapel }}?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary btn-sm shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                        <form action="{{ route('data-mapel.destroy', $item->id) }}" method="POST" style="display: inline;">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <input type="submit" value="Hapus" class="btn btn-danger btn-sm shadow-none">
+                                                        </form> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            @endforeach 
                         </div>
                     </div>
                 </div>

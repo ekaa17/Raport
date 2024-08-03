@@ -41,10 +41,10 @@
 
                             <div class="mb-3">
                                 <label for="jurusan_id" class="form-label">Jurusan</label>
-                                <select class="form-select" id="jurusan_id" name="jurusan_id" required>
+                                <select class="form-select  @error('jurusan_id') is-invalid @enderror" id="jurusan_id" name="jurusan_id">
                                     <option value="">Pilih Jurusan</option>
                                     @foreach ($jurusans as $jurusan)
-                                        <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                                        <option value="{{ $jurusan->id }}">{{ $jurusan->nama_jurusan }}</option>
                                     @endforeach
                                 </select>
                                 @error('jurusan_id')
@@ -53,21 +53,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="nama_mapel" class="form-label">Mata Pelajaran</label>
-                                <select class="form-select" id="nama_mapel" name="nama_mapel" required>
-                                    <option value="">Pilih Mata Pelajaran</option>
-                                    @foreach ($mapels as $mapel)
-                                        <option value="{{ $mapel->id }}">{{ $mapel->nama }}</option>
-                                    @endforeach
-                                </select>
-                                @error('nama_mapel')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="nama_kelas" class="form-label">Nama Kelas</label>
-                                <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" required>
+                                <input type="text" class="form-control  @error('nama_kelas') is-invalid @enderror" id="nama_kelas" name="nama_kelas">
                                 @error('nama_kelas')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -75,30 +62,17 @@
 
                             <div class="mb-3">
                                 <label for="kelas" class="form-label">Kelas</label>
-                                <select class="form-select" id="kelas" name="kelas" required>
+                                <select class="form-select  @error('kelas') is-invalid @enderror" id="kelas" name="kelas">
                                     <option value="">Pilih Kelas</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
+                                    <option value="10">X</option>
+                                    <option value="11">XI</option>
+                                    <option value="12">XII</option>
                                 </select>
                                 @error('kelas')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-
-                            <div class="mb-3">
-                                <label for="tahun_pelajaran_id" class="form-label">Tahun Pelajaran</label>
-                                <select class="form-select" id="tahun_pelajaran_id" name="tahun_pelajaran_id" required>
-                                    <option value="">Pilih Tahun Pelajaran</option>
-                                    @foreach ($data_tahun_ajarans as $tahunPelajaran)
-                                        <option value="{{ $tahunPelajaran->id }}">{{ $tahunPelajaran->tahun }}</option>
-                                    @endforeach
-                                </select>
-                                @error('tahun_pelajaran_id')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
+                            
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <a href="{{ route('data-kelas.index') }}" class="btn btn-secondary">Kembali</a>
                         </form>
