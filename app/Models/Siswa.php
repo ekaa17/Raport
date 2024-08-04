@@ -18,8 +18,7 @@ class siswa extends Model
         'nama',
         'jenis_kelamin',
         'alamat',
-        'kelas',
-        'id_jurusan',
+        'kelas_id',
     ];
 
     // Mendefinisikan hubungan dengan model Jurusan

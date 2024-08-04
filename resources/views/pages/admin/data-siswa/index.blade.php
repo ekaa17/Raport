@@ -53,7 +53,7 @@
                                         {{ $item->nama_kelas }}
                                       </h5>
                                       <div class="d-flex gap-2">
-                                        <a href="{{ route('data-siswa.show', $item->id) }}" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
+                                        <a href="/data-siswa/show/{{ $item->id }}" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
                                       </div>
                                     </div>
                                   </div>

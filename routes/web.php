@@ -41,7 +41,16 @@ Route::group(['middleware' => 'cekrole:admin'], function() {
     Route::resource('/tahun-ajaran', TahunAjaranController::class)->names('tahun-ajaran');
     Route::resource('/jurusan', JurusanController::class)->names('jurusan');
     Route::resource('/data-staff', StaffController::class)->names('data-staff');
-    Route::resource('/data-siswa', SiswaController::class)->names('data-siswa');
+
+    Route::get('/data-siswa', [SiswaController::class, 'index']);
+    Route::get('/data-siswa/create/{id}', [SiswaController::class, 'create']);
+    Route::post('/data-siswa/store', [SiswaController::class, 'store']);
+    Route::get('/data-siswa/edit/{id}', [SiswaController::class, 'edit']);
+    Route::get('/data-siswa/show/{id}', [SiswaController::class, 'show']);
+    Route::put('/data-siswa/update/{id}', [SiswaController::class, 'update']);
+    Route::delete('/data-siswa/destroy/{id}', [SiswaController::class, 'destroy']);
+
+
     Route::resource('/data-kelas', KelasController::class)->names('data-kelas');
     Route::post('/data-kelas-mapel', [KelasController::class, 'show']);
     Route::delete('/hapus-kelas-mapel/{id}', [KelasController::class, 'destroy_mapel']);

@@ -44,7 +44,7 @@
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
                             <h5 class="card-title">Total : {{ $siswa->count() }} Siswa</h5>
-                            <a href="" class="btn btn-primary btn-sm">
+                            <a href="/data-siswa/create/{{ $kelas->id }}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-plus"></i> Data Baru
                             </a>
                         </div>
@@ -53,33 +53,48 @@
                             <table class="table datatable" id="pegawai">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <th>Nomor Induk</th>
                                         <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Gender</th>
-                                        <th>Aksi</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Alamat</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($siswa as $index => $item)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
-                                        <td>
-                                            <a href="{{ route('data-staff.edit', $item->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="bi bi-pencil-fill"></i>
-                                            </a>
-                                            <form action="{{ route('data-staff.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                                    <i class="bi bi-trash-fill"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($siswa as $s)
+                                        <tr>
+                                            <td>{{ $s->nomor_induk }}</td>
+                                            <td>{{ $s->nama }}</td>
+                                            <td>{{ $s->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                            <td>{{ $s->alamat }}</td>\
+                                            <td>
+                                                <a href="/data-siswa/edit/{{ $s->id }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                                {{-- hapus data --}}
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapus-siswa{{ $s->id }}"> Hapus </button>
+                                                <div class="modal fade" id="hapus-siswa{{ $s->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title"> Hapus Informasi Siswa </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                          </div>
+                                                            <div class="modal-body text-center">
+                                                                <p style="color: black">Apakah anda yakin untuk menghapus data {{ $s->nama }}?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary btn-sm shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                                <form action="/data-siswa/destroy/{{ $s->id }}" method="POST" style="display: inline;">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <input type="submit" value="Hapus" class="btn btn-danger btn-sm shadow-none">
+                                                                </form> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
