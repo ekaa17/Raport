@@ -85,9 +85,11 @@
                                                 @endphp
                                                 @if ($allFilled)
                                                     <td>
-                                                        <a href="/raport/{{ $siswa->id }}" class="btn btn-info" target="_blank">
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>                                                    
+                                                        @if ($siswa->nilai->first()->status != 'selesai') 
+                                                            <a href="/raport/{{ $siswa->id }}" class="btn btn-info" target="_blank">
+                                                                <i class="bi bi-eye"></i>
+                                                            </a>
+                                                        @endif                                                    
                                                     </td>
                                                     <td>
                                                         @if ($siswa->nilai->first()->status == null)    
@@ -97,7 +99,7 @@
                                                         @elseif ($siswa->nilai->first()->status == 'ditandatangani walikelas') 
                                                             <button disabled="disabled" class="btn btn-secondary">  <i class="bi bi-pencil"></i>  </button>
                                                         @elseif ($siswa->nilai->first()->status == 'selesai') 
-                                                            <a href="/download/{{ $siswa->id }}" class="btn btn-success" target="_blank">
+                                                            <a href="/raport/{{ $siswa->id }}" class="btn btn-success" target="_blank">
                                                                 <i class="bi bi-download"></i> 
                                                             </a> 
                                                         @endif
