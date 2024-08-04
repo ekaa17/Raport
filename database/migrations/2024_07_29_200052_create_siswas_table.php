@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nomor_induk');
-            $table->string('nama');
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->string('alamat');
-            $table->foreignId('kelas_id')
-                ->constrained('data_kelas', 'id');
-            $table->timestamps();
+            $table->id(); // Kolom primary key, dihasilkan secara otomatis
+            $table->string('nomor_induk')->unique(); // Kolom nomor_induk dengan constraint unik
+            $table->string('nama'); // Kolom nama
+            $table->enum('jenis_kelamin', ['L', 'P']); // Kolom jenis_kelamin dengan enum
+            $table->text('alamat'); // Kolom alamat
+            $table->foreignId('kelas_id')->constrained('data_kelas')->onDelete('cascade'); // Kolom foreign key untuk tabel kelas
+            $table->timestamps(); // Kolom timestamps (created_at, updated_at)
         });
     }
 

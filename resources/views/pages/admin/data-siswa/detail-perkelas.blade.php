@@ -44,7 +44,7 @@
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
                             <h5 class="card-title">Total : {{ $siswa->count() }} Siswa</h5>
-                            <a href="" class="btn btn-primary btn-sm">
+                            <a href="{{ route('data-siswa.create') }}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-plus"></i> Data Baru
                             </a>
                         </div>
@@ -53,33 +53,31 @@
                             <table class="table datatable" id="pegawai">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <th>Nomor Induk</th>
                                         <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Gender</th>
-                                        <th>Aksi</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Alamat</th>
+                                        <th>Kelas</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($siswa as $index => $item)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
-                                        <td>
-                                            <a href="{{ route('data-staff.edit', $item->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="bi bi-pencil-fill"></i>
-                                            </a>
-                                            <form action="{{ route('data-staff.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                                    <i class="bi bi-trash-fill"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($siswa as $s)
+                                        <tr>
+                                            <td>{{ $s->nomor_induk }}</td>
+                                            <td>{{ $s->nama }}</td>
+                                            <td>{{ $s->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                            <td>{{ $s->alamat }}</td>
+                                            <td>{{ $s->kelas->kelas ?? 'N/A' }}</td>
+                                            <td>
+                                                <a href="{{ route('data-siswa.edit', $s->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('data-siswa.destroy', $s->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
