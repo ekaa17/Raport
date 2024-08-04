@@ -17,7 +17,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body pt-3">
-                        <form action="{{ route('data-staff.update', $staff->id) }}" method="POST">
+                        <form action="{{ route('data-staff.update', $staff->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
@@ -74,7 +74,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="walikelas" class="col-sm-2 col-form-label">Walikelas</label>
                                 <div class="col-sm-10">
                                     <select name="walikelas" id="walikelas" class="form-select @error('walikelas') is-invalid @enderror">
@@ -84,6 +84,15 @@
                                     </select>
                                     @error('walikelas')
                                         <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div> --}}
+                            <div class="row mb-3">
+                                <label for="tandatangan" class="col-md-2 col-form-label">Tanda Tangan Digital</label>
+                                <div class="col-md-10">
+                                    <input type="file" name="tandatangan" id="tandatangan" class="form-control @error('tandatangan') is-invalid @enderror" accept="image/*">
+                                    @error('tandatangan')
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

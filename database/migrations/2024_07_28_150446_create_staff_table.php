@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->enum('role', ['admin', 'guru', 'kepala sekolah']);
-            $table->enum('walikelas', ['ya', 'tidak']);
+            $table->string('tanda_tangan')->nullable();
             $table->string('password');
             $table->timestamps();
         });

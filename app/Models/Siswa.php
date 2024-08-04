@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\data_kelas;
+use App\Models\data_nilai_mapel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class siswa extends Model
 {
@@ -21,8 +23,13 @@ class siswa extends Model
     ];
 
     // Mendefinisikan hubungan dengan model Jurusan
-    public function jurusan()
+    public function kelas()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(data_kelas::class);
+    }
+
+    public function nilai()
+    {
+        return $this->hasMany(data_nilai_mapel::class, 'nomor_induk');
     }
 }

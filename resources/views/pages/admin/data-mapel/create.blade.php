@@ -22,7 +22,21 @@
                             <div class="row mb-3">
                                 <label for="nama_mapel" class="col-sm-2 col-form-label">Nama Mapel</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="nama_mapel" class="form-control @error('nama_mapel') is-invalid @enderror" id="nama_mapel" value="{{ old('nama_mapel') }}" required>
+                                    <input type="text" name="nama_mapel" class="form-control @error('nama_mapel') is-invalid @enderror" id="nama_mapel" value="{{ old('nama_mapel') }}">
+                                    @error('nama_mapel')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="nama_mapel" class="col-sm-2 col-form-label">Kelompok</label>
+                                <div class="col-sm-10">
+                                    <select name="kelompok" id="kelompok" class="form-select @error('kelompok') is-invalid @enderror">
+                                        <option value="" disabled selected>Pilih Kelompok</option>
+                                        <option value="Kelompok A" {{ old('kelompok') == 'Kelompok A' ? 'selected' : '' }}>Kelompok A - Muatan Nasional</option>
+                                        <option value="Kelompok B" {{ old('kelompok') == 'Kelompok B' ? 'selected' : '' }}>Kelompok B - </option>
+                                        <option value="Kelompok C" {{ old('kelompok') == 'Kelompok C' ? 'selected' : '' }}>Kelompok C - Paket Keahlian</option>
+                                    </select>
                                     @error('nama_mapel')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

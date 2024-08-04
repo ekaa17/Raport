@@ -43,7 +43,7 @@
                                     <select id="id_kelas" name="id_kelas" class="form-select @error('id_kelas') is-invalid @enderror">
                                         <option value="" disabled selected>Pilih Kelas</option>
                                         @foreach($kelas as $k)
-                                            <option value="{{ $k->id }}" {{ old('id_kelas') == $k->id ? 'selected' : '' }}>{{ $k->kelas }}</option>
+                                            <option value="{{ $k->id }}" {{ old('id_kelas') == $k->id ? 'selected' : '' }}>{{ $k->kelas }} {{ $k->nama_kelas }}</option>
                                         @endforeach
                                     </select>
                                     @error('id_kelas')
@@ -69,8 +69,8 @@
 
                             <div class="row mb-3">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="{{ route('data-walikelas.index') }}" class="btn btn-secondary">Batal</a>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </div>
                         </form>

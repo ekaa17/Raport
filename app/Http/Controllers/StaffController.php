@@ -31,9 +31,17 @@ class StaffController extends Controller
             'email' => 'required|email|unique:staff',
             'jenis_kelamin' => 'required|in:L,P',
             'role' => 'required|in:admin,guru,kepala sekolah',
-            'walikelas' => 'required|in:ya,tidak',
+            // 'walikelas' => 'required|in:ya,tidak',
             'password' => 'required|string|min:8',
         ]);
+
+        if ($request->hasFile('tandatangan')) {
+            $ttd_digital = $request->file('tandatangan');
+            $imageName = $request->nip . '_' . $request->nama . '.' . $ttd_digital->extension();
+            $ttd_digital->move(public_path('assets/img/ttd-staff/'), $imageName);
+        } else {
+            $imageName = null;
+        }
 
         // Membuat staff baru
         Staff::create([
@@ -42,7 +50,8 @@ class StaffController extends Controller
             'email' => $request->input('email'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
             'role' => $request->input('role'),
-            'walikelas' => $request->input('walikelas'),
+            // 'walikelas' => $request->input('walikelas'),
+            'tanda_tangan' => $imageName,
             'password' => bcrypt($request->input('password')), // Mengenkripsi password
         ]);
 
@@ -76,12 +85,23 @@ class StaffController extends Controller
             'email' => 'required|email|max:255',
             'jenis_kelamin' => 'required|in:L,P',
             'role' => 'required|in:admin,guru,kepala sekolah',
-            'walikelas' => 'required|in:ya,tidak',
+            // 'walikelas' => 'required|in:ya,tidak',
             'password' => 'nullable|string|min:6|confirmed',
         ]);
 
         // Menemukan staff berdasarkan ID
         $staff = Staff::findOrFail($id);
+
+        if ($request->hasFile('tandatangan')) {
+            if ($staff->tanda_tangan && file_exists(public_path('assets/img/ttd-staff/' . $staff->tanda_tangan))) {
+                unlink(public_path('assets/img/ttd-staff/' . $staff->tanda_tangan));
+            }
+            $tanda_tanganImage = $request->file('tandatangan');
+            $imageName = $request->nip . '_' . $request->nama . '.' . $tanda_tanganImage->extension();
+            $tanda_tanganImage->move(public_path('assets/img/ttd-staff/'), $imageName);
+        } else {
+            $imageName = $staff->tanda_tangan;
+        }
 
         // Memperbarui data staff
         $staff->nip = $validatedData['nip'];
@@ -89,7 +109,8 @@ class StaffController extends Controller
         $staff->email = $validatedData['email'];
         $staff->jenis_kelamin = $validatedData['jenis_kelamin'];
         $staff->role = $validatedData['role'];
-        $staff->walikelas = $validatedData['walikelas'];
+        $staff->tanda_tangan = $imageName;
+        // $staff->walikelas = $validatedData['walikelas'];
 
         // Memperbarui password jika ada
         if ($request->filled('password')) {

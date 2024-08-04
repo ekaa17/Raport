@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Staff;
+use App\Models\data_kelas;
+use App\Models\data_tahun_ajaran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class data_wali_kelas extends Model
 {
@@ -30,7 +33,7 @@ class data_wali_kelas extends Model
      */
     public function staff()
     {
-        return $this->belongsTo(staff::class, 'id_staff');
+        return $this->belongsTo(Staff::class, 'id_staff');
     }
 
     /**

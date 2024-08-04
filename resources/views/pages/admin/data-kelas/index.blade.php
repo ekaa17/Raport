@@ -64,41 +64,61 @@
                                         </td>
                                         <td>{{ $item->jurusan->nama_jurusan }}</td>
                                         <td>
-                                            <ol>
-                                                @foreach ($item->detail_mapel_kelas as $detail)
-                                                    <li> {{ $detail->mapel->nama_mapel }} 
-                                                        <button type="button" class="btn btn-danger btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#hapus-mapel{{ $detail->id }}">
-                                                            <i class="bi bi-trash-fill"></i>
-                                                        </button>
-                                                        <div class="modal fade" id="hapus-mapel{{ $detail->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title text-center">Konfirmasi Hapus Data</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th> No. </th>
+                                                        <th> Nama Mapel </th>
+                                                        <th> Pengajar </th>
+                                                        <th>  </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($item->detail_mapel_kelas->where('tahun_ajaran_id', $tahun_ajaran->id) as $index2 => $detail)
+                                                        <tr>
+                                                            <td> {{ $index2 + 1 }} </td>
+                                                            <td> {{ $detail->mapel->nama_mapel }}  </td>
+                                                            <td> {{ $detail->staff->nama }}  </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-danger btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#hapus-mapel{{ $detail->id }}">
+                                                                    <i class="bi bi-trash-fill"></i>
+                                                                </button>
+                                                                <div class="modal fade" id="hapus-mapel{{ $detail->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title text-center">Konfirmasi Hapus Data</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body text-center">
+                                                                                <p style="color: black">Apakah anda yakin untuk menghapus mata pelajaran  {{ $detail->mapel->nama_mapel }}  ?</p>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary btn-sm shadow-none" data-bs-dismiss="modal">Tidak</button>
+                                                                                <form action="/hapus-kelas-mapel/{{ $detail->id }}" method="POST" style="display: inline;">
+                                                                                    @method('delete')
+                                                                                    @csrf
+                                                                                    <input type="submit" value="Hapus" class="btn btn-danger btn-sm shadow-none">
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="modal-body text-center">
-                                                                        <p style="color: black">Apakah anda yakin untuk menghapus mata pelajaran  {{ $detail->mapel->nama_mapel }}  ?</p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary btn-sm shadow-none" data-bs-dismiss="modal">Tidak</button>
-                                                                        <form action="/hapus-kelas-mapel/{{ $detail->id }}" method="POST" style="display: inline;">
-                                                                            @method('delete')
-                                                                            @csrf
-                                                                            <input type="submit" value="Hapus" class="btn btn-danger btn-sm shadow-none">
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div></li>
-                                                @endforeach
-                                            </ol>
+                                                                </div></li>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
 
                                             {{-- tambah mapel --}}
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah-mapel">
-                                                <i class="bi bi-plus-square"></i> tambah mata pelajaran
-                                            </button>
-                                            <div class="modal fade" id="tambah-mapel" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            @if (DB::table('data_tahun_ajarans')->where('status', '!=' ,'nonaktif')->exists())       
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah-mapel{{ $item->id }}">
+                                                    <i class="bi bi-plus-square"></i> tambah mata pelajaran
+                                                </button>
+                                            @else
+                                                <p class="text-danger"> tahun ajaran baru belum dimulai </p>
+                                            @endif
+                                            <div class="modal fade" id="tambah-mapel{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <form action="/data-kelas-mapel" method="post">
                                                     @csrf
@@ -117,8 +137,22 @@
                                                                     @foreach ($data_mapel as $mapel)
                                                                       <option value="{{ $mapel->id }}" {{ old('mapel_id') == $mapel->id ? 'selected' : '' }}> {{ $mapel->nama_mapel }} </option>  
                                                                     @endforeach
-                                                                  </select>
+                                                                </select>
                                                                 @error('mapel_id') 
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div> 
+                                                                @enderror
+                                                            </div>          
+                                                            <div class="mx-1 my-2">
+                                                                <label for="pengajar_id" class="form-label">Nama Pengajar</label>
+                                                                <select name="pengajar_id" id="pengajar_id" class="form-select @error('pengajar_id') is-invalid @enderror">
+                                                                    <option selected disabled>Pilih Pengajar</option>
+                                                                    @foreach ($data_guru as $guru)
+                                                                      <option value="{{ $guru->id }}" {{ old('pengajar_id') == $guru->id ? 'selected' : '' }}> {{ $guru->nama }} </option>  
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('pengajar_id') 
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
                                                                 </div> 

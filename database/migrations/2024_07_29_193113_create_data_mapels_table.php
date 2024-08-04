@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('data_mapels', function (Blueprint $table) {
             $table->id();
             $table->string('nama_mapel');
+            $table->enum('kelompok', ['Kelompok A', 'Kelompok B', 'Kelompok C']);
             $table->timestamps();
         });
     }

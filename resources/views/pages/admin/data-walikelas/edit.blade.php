@@ -26,7 +26,7 @@
                                     <select id="id_kelas" name="id_kelas" class="form-select @error('id_kelas') is-invalid @enderror">
                                         <option value="" disabled selected>Pilih Kelas</option>
                                         @foreach($kelas as $k)
-                                            <option value="{{ $k->id }}" {{ old('id_kelas', $waliKelas->id_kelas) == $k->id ? 'selected' : '' }}>{{ $k->kelas }}</option>
+                                            <option value="{{ $k->id }}" {{ old('id_kelas', $waliKelas->id_kelas) == $k->id ? 'selected' : '' }}>{{ $k->kelas }} {{ $k->nama_kelas }}</option>
                                         @endforeach
                                     </select>
                                     @error('id_kelas')
@@ -50,8 +50,8 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{ route('data-walikelas.index') }}" class="btn btn-secondary">Kembali</a>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>

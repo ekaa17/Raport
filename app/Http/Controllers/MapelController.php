@@ -24,11 +24,13 @@ class MapelController extends Controller
         // Validasi input
         $request->validate([
             'nama_mapel' => 'required|string|max:255',
+            'kelompok' => 'required',
         ]);
 
         // Simpan data
         data_mapel::create([
             'nama_mapel' => $request->input('nama_mapel'),
+            'kelompok' => $request->input('kelompok'),
         ]);
 
         // Redirect dengan pesan sukses
@@ -50,16 +52,20 @@ class MapelController extends Controller
         // Validasi input
         $request->validate([
             'nama_mapel' => 'required|string|max:255',
+            'kelompok' => 'required',
         ]);
 
         // Temukan data mapel berdasarkan ID dan perbarui
         $mapel = data_mapel::findOrFail($id);
-        $mapel->update([
-            'nama_mapel' => $request->input('nama_mapel'),
-        ]);
+        $mapel->nama_mapel = $request->nama_mapel;
+        $mapel->kelompok = $request->kelompok;
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('data-mapel.index')->with('success', 'Mapel berhasil diperbarui!');
+        if ($mapel->save()) {
+            return redirect()->route('data-mapel.index')->with('success', 'Mapel berhasil diperbarui!');
+        } else {
+            return redirect()->route('data-mapel.index')->with('error', 'Gagal mengupdate data');
+        }
+
     }
 
     public function destroy($id)

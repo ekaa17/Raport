@@ -69,6 +69,7 @@
                                       <th>Kelas</th>
                                       <th>Jurusan</th>
                                       <th>Wali Kelas</th>
+                                      <th> Tanda Tangan </th>
                                       <th> Aksi </th>
                                   </tr>
                               </thead>
@@ -88,6 +89,7 @@
                                     </td>
                                     <td>{{ $item->kelas->jurusan->nama_jurusan }}</td>
                                     <td>{{ $item->staff->nama }}</td>
+                                    <td>{{ $item->staff->tanda_tangan != null ? 'tersedia' : 'tidak' }}</td>
                                     <td>
                                         <a href="{{ route('data-walikelas.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                             <i class="bi bi-pencil-fill"></i>

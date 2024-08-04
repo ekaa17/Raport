@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\data_wali_kelas;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -20,4 +21,10 @@ class Staff extends Authenticatable
         'walikelas',
         'password',
     ];
+
+    public function waliKelas()
+    {
+        return $this->hasOne(data_wali_kelas::class, 'id_staff');
+    }
 }
+

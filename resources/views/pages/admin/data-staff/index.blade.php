@@ -48,6 +48,7 @@
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Gender</th>
+                                        <th>TTD</th>
                                         <th>Role</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -60,6 +61,7 @@
                                         <td>{{ $member->nama }}</td>
                                         <td>{{ $member->email }}</td>
                                         <td>{{ $member->jenis_kelamin == 'L' ? 'Laki - Laki' : 'Perempuan' }}</td>
+                                        <td>{{ $member->tanda_tangan != null ? 'tersedia' : 'tidak' }}</td>
                                         <td>
                                             @if($member->role == 'kepala sekolah')
                                                 <span class="badge rounded-pill bg-secondary">{{ $member->role }}</span>

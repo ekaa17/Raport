@@ -14,51 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('staff')->insert([
+        DB::table('data_tahun_ajarans')->insert([
             [
-                'nip' => '12345678',
-                'nama' => 'admin',
-                'email' => 'admin@gmail.com',
-                'jenis_kelamin' => 'L',
-                'role' => 'admin',
-                'walikelas' => 'tidak',
-                'password' => Hash::make('123456'),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'tahun_ajaran' => '2023/2024',
+                'semester' => 'Ganjil',
+                'status' => 'aktif',
             ],
-            [
-                'nip' => '87654321',
-                'nama' => 'Jane Smith',
-                'email' => 'guru@gmail.com',
-                'jenis_kelamin' => 'P',
-                'role' => 'guru',
-                'walikelas' => 'ya',
-                'password' => Hash::make('123456'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nip' => '87654321',
-                'nama' => 'Ariana',
-                'email' => 'guru@gmail.com',
-                'jenis_kelamin' => 'P',
-                'role' => 'guru',
-                'walikelas' => 'tidak',
-                'password' => Hash::make('123456'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nip' => '87654321',
-                'nama' => 'Jon Doe',
-                'email' => 'kepala@gmail.com',
-                'jenis_kelamin' => 'P',
-                'role' => 'kepala sekolah',
-                'walikelas' => 'tidak',
-                'password' => Hash::make('123456'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+        ]);
+
+        $this->call([
+            StaffSeeder::class,
+            JurusanSeeder::class,
+            KelasSeeder::class,
+            MapelSeeder::class,
+            SiswaSeeder::class,
         ]);
     }
 }

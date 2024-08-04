@@ -53,9 +53,23 @@
                                         {{ $item->nama_kelas }}
                                       </h5>
                                       <div class="d-flex gap-2">
-                                        <a href="{{ route('data-siswa.show', $item->id) }}" class="btn btn-info"> Data Siswa <i class="bi bi-chevron-double-right"></i></a>
+                                        <a href="/nilai-raport/{{ $item->id }}" class="btn btn-info"> Nilai Siswa <i class="bi bi-chevron-double-right"></i></a>
                                       </div>
                                     </div>
+                                    @if (($raport_selesai->get($item->id)->jumlah ?? 0) == $item->siswas->count())
+                                        <p class="text-center">
+                                            raport telah ditandatangani
+                                        </p>
+                                    @else
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title"> {{ $siswa_ditandatangani->get($item->id)->jumlah ?? 0 }} / {{ $item->siswas->count() }} telah dinilai </h5>
+                                            @if (($siswa_ditandatangani->get($item->id)->jumlah ?? 0) == $item->siswas->count())
+                                                <a href="/ttd-raport/{{ $item->id }}" class="btn btn-success"> Tandatangan <i class="bi bi-chevron-double-right"></i></a>
+                                            @else
+                                                <button class="btn btn-secondary"> Tandatangan <i class="bi bi-chevron-double-right"></i></button>
+                                            @endif
+                                        </div>
+                                    @endif
                                   </div>
                                 </div>
                             </div>

@@ -2,27 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Staff;
+use App\Models\DetailMapelKelas;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class data_nilai_mapel extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_nilai_mapel';
-
-    // Menentukan kolom mana saja yang dapat diisi
-    protected $fillable = [
-        'nomor_induk',
-        'id_mapel',
-        'id_pengajar',
-        'tahun_pelajaran_id',
-        'nilai_tugas',
-        'nilai_uts',
-        'nilai_uas',
-        'nilai_absensi',
-        'nilai_kepribadian',
-    ];
+    protected $table = 'data_nilai_mapels';
+    protected $guarded = ['id'];
 
     // Mendefinisikan hubungan dengan model Siswa
     public function siswa()
@@ -30,6 +20,11 @@ class data_nilai_mapel extends Model
         return $this->belongsTo(siswa::class, 'nomor_induk');
     }
 
+    public function detail_mapel_kelas()
+    {
+        return $this->belongsTo(DetailMapelKelas::class, 'detail_mapel_id');
+    }
+    
     // Mendefinisikan hubungan dengan model Mapel
     public function mapel()
     {

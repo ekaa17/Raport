@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\data_kelas;
 use App\Models\data_mapel;
+use App\Models\data_tahun_ajaran;
 use App\Models\DetailMapelKelas;
 use App\Models\Jurusan;
+use App\Models\Staff;
 
 class KelasController extends Controller
 {
@@ -18,7 +20,9 @@ class KelasController extends Controller
         $title = 'Informasi Kelas';
         $data_kelas = data_kelas::orderby('kelas')->get();
         $data_mapel = data_mapel::orderby('nama_mapel')->get();
-        return view('pages.admin.data-kelas.index', compact('no', 'title', 'data_kelas', 'data_mapel'));
+        $data_guru = Staff::where('role', 'guru')->get();
+        $tahun_ajaran = data_tahun_ajaran::where('status', 'aktif')->first();
+        return view('pages.admin.data-kelas.index', compact('no', 'title', 'data_kelas', 'data_mapel', 'data_guru', 'tahun_ajaran'));
     }
 
     public function create()
@@ -74,9 +78,18 @@ class KelasController extends Controller
     }
 
     public function show(Request $request) {
+        $request->validate([
+            'mapel_id' => 'required',
+            'pengajar_id' => 'required',
+        ]);
+
+        $tahun_ajaran = data_tahun_ajaran::where('status', 'aktif')->first();
+
         $detail_data = DetailMapelKelas::create([
             'kelas_id' => $request->kelas_id,
             'mapel_id' => $request->mapel_id,
+            'pengajar_id' => $request->pengajar_id,
+            'tahun_ajaran_id' => $tahun_ajaran->id,
         ]);
 
         if ($detail_data->save()) {

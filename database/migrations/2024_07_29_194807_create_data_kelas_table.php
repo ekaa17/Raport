@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained('jurusans', 'id')
                 ->onDelete('cascade');
             $table->string('nama_kelas');
-            $table->enum('kelas', ['10', '11', '12']);
+            $table->integer('kelas');
             $table->timestamps();
         });
     }
