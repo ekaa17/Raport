@@ -15,17 +15,11 @@ class JurusanSeeder extends Seeder
     {
         DB::table('jurusans')->insert([
             [
-                'nama_jurusan' => 'Komunikasi',
+                'nama_jurusan' => 'Perbankan',
             ],
             [
                 'nama_jurusan' => 'Akutansi',
-            ],
-            [
-                'nama_jurusan' => 'Bisnis',
-            ],
-            [
-                'nama_jurusan' => 'Managemen',
-            ],
+            ]
         ]);
     }
 }

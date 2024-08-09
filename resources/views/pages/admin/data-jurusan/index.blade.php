@@ -77,6 +77,7 @@
                                           </div>
                                         </div>
 
+
                                         {{-- hapus data --}}
                                         <button type="button" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#hapus-jurusan{{ $item->id }}"><i class="bi bi-trash"></i></button>
                                         <div class="modal fade" id="hapus-jurusan{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

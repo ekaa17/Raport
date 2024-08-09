@@ -78,7 +78,7 @@
                                                     <form action="{{ route('data-nilai.update', $nilaiMapel->id) }}" method="POST" class="d-flex">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="text" class="form-control" name="nilai_tugas" value="{{ $nilaiMapel->nilai_tugas ?? '' }}">
+                                                        <input type="number" class="form-control" name="nilai_tugas" value="{{ $nilaiMapel->nilai_tugas ?? '' }}" step="1">
                                                         <button type="submit" class="btn btn-primary btn-sm">
                                                             <i class="bi bi-check-square"></i>
                                                         </button>
@@ -100,7 +100,7 @@
                                                     <form action="{{ route('data-nilai.update', $nilaiMapel->id) }}" method="POST" class="d-flex">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="text" class="form-control" name="nilai_uts" value="{{ $nilaiMapel->nilai_uts ?? '' }}">
+                                                        <input type="text" class="form-control" name="nilai_uts" value="{{ $nilaiMapel->nilai_uts ?? '' }} " step="1">
                                                         <button type="submit" class="btn btn-primary btn-sm">
                                                             <i class="bi bi-check-square"></i>
                                                         </button>
@@ -114,7 +114,7 @@
                                                     <form action="{{ route('data-nilai.update', $nilaiMapel->id) }}" method="POST" class="d-flex">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="text" class="form-control" name="nilai_uas" value="{{ $nilaiMapel->nilai_uas ?? '' }}">
+                                                        <input type="text" class="form-control" name="nilai_uas" value="{{ $nilaiMapel->nilai_uas ?? '' }}"step="1">
                                                         <button type="submit" class="btn btn-primary btn-sm">
                                                             <i class="bi bi-check-square"></i>
                                                         </button>

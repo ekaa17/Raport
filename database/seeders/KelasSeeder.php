@@ -16,39 +16,25 @@ class KelasSeeder extends Seeder
         DB::table('data_kelas')->insert([
             [
                 'jurusan_id' => '1',
-                'nama_kelas' => 'K1',
+                'nama_kelas' => 'AK1',
                 'kelas' => 10,
             ],
             [
                 'jurusan_id' => '1',
-                'nama_kelas' => 'K2',
+                'nama_kelas' => 'AK2',
                 'kelas' => 10,
             ],
             [
                 'jurusan_id' => '2',
-                'nama_kelas' => 'A1',
+                'nama_kelas' => 'PB1',
                 'kelas' => 10,
             ],
             [
                 'jurusan_id' => '2',
-                'nama_kelas' => 'A1',
+                'nama_kelas' => 'PB1',
                 'kelas' => 11,
-            ],
-            [
-                'jurusan_id' => '2',
-                'nama_kelas' => 'A1',
-                'kelas' => 12,
-            ],
-            [
-                'jurusan_id' => '3',
-                'nama_kelas' => 'B1',
-                'kelas' => 10,
-            ],
-            [
-                'jurusan_id' => '4',
-                'nama_kelas' => 'M1',
-                'kelas' => 10,
-            ],
+            ]
+
         ]);
     }
 }

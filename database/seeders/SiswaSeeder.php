@@ -23,7 +23,7 @@ class SiswaSeeder extends Seeder
                 'nama' => $faker->name,
                 'jenis_kelamin' => $faker->randomElement(['L', 'P']),
                 'alamat' => $faker->address,
-                'kelas_id' => $faker->numberBetween(1, 7),
+                'kelas_id' => $faker->numberBetween(1, 2),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
